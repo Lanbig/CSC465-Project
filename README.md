@@ -5,7 +5,7 @@
 ![alt tag](https://github.com/Lanbig/CSC465-Project/blob/master/CalendarHeat-Coupon_redempt.png)
 
 ### Network Graph
-#### simplify edges and direction
+#### simplify edges and directions
 ![alt tag](https://github.com/Lanbig/CSC465-Project/blob/master/NetworkGrp-ProductDep-D.png)
 
 #### simplify edges 
