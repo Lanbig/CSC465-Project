@@ -1,4 +1,4 @@
-max(transaction_data$DAY)
+raw_transaction = read.table("./Dataset/transaction_data.csv", sep=",", header=T ,na.strings = " ")
+raw_transaction$Date <- as.Date(raw_transaction$DAY -1, origin = "2010-03-24")
 
-transaction_data$Date_Custom <- as.Date(transaction_data$DAY -1, origin = "2010-01-20")
-write.csv(transaction_data, file = "transaction_custom.csv")
+write.csv(raw_transaction, file = "transaction_wDate.csv",row.names=FALSE)
