@@ -1,8 +1,8 @@
 library(igraph)
-setwd("~/Dropbox/CSC465/dunnhumby_The-Complete-Journey/dunnhumby - The Complete Journey CSV")
+setwd("~/Dropbox/CSC465/CSC465-Project/")
 
-raw_transaction = read.table("transaction_data.csv", sep=",", header=T ,na.strings = " ")
-raw_product = read.table("product.csv", sep=",", header=T, na.strings = " ")
+raw_transaction = read.table("./Dataset/transaction_data.csv", sep=",", header=T ,na.strings = " ")
+raw_product = read.table("./Dataset/product.csv", sep=",", header=T, na.strings = " ")
 
 raw_total <- merge(raw_transaction,raw_product,by="PRODUCT_ID", all.x=TRUE)
 
@@ -59,6 +59,9 @@ plot(g,layout=layout.circle,	# the layout method. see the igraph documentation f
      vertex.label=V(g)$name,		#specifies the lables of the vertices. in this case the 'name' attribute is used
      vertex.label.cex=1)
 
+dev.copy(device = png, filename = 'NetworkGrp-ProductDep.png', width = 1024, height = 768) 
+dev.off()
+
 #####################
 
 g = graph.data.frame(edges, directed=T)
@@ -74,8 +77,11 @@ plot(g,  layout=layout.fruchterman.reingold,	# the layout method. see the igraph
      vertex.label.font=2,			#the font of the name labels
      vertex.label=V(g)$name,		#specifies the lables of the vertices. in this case the 'name' attribute is used
      edge.width=edge.betweenness(g),
+     edge.arrow.size=0.3,
      vertex.color=V(g)$color,
      vertex.label.cex=1)
 
+dev.copy(device = png, filename = 'NetworkGrp-ProductDep-D.png', width = 1024, height = 768) 
+dev.off()
 
 
