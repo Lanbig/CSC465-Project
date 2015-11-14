@@ -1,0 +1,6 @@
+
+*.csv
+
+Dataset/.RData
+
+Dataset/.Rhistory
