@@ -13,7 +13,7 @@ DateVol_agg$Date <- as.Date(DateVol_agg$DAY -1, origin = "2010-03-24")
 p1 <- calendarHeat(DateVol_agg$Date, DateVol_agg$SALES_VALUE, varname="Sales Value", color = 'r2b')
 p1
 
-dev.copy(device = png, filename = 'Sales-calendarheat.png', width = 1024, height = 768) 
+dev.copy(device = png, filename = 'CalendarHeat-Sales.png', width = 1024, height = 768) 
 dev.off()
 
 # Overall pattern 
@@ -34,7 +34,7 @@ coupon_redempt_agg$Date <- as.Date(coupon_redempt_agg$DAY -1, origin = "2010-03-
 p2 <- calendarHeat(coupon_redempt_agg$Date, coupon_redempt_agg$nCoupon, varname="Coupon_redempt thoughtout the years", color = 'w2g')
 p2
 
-dev.copy(device = png, filename = 'Coupon_redempt-calendarheat.png', width = 1024, height = 768) 
+dev.copy(device = png, filename = 'CalendarHeat-Coupon_redempt.png', width = 1024, height = 768) 
 dev.off()
 
 ##############################################################################
