@@ -33,3 +33,6 @@ p2f <- p2f + geom_violin(outlier.shape = 3) + geom_boxplot(width=.1)
 p2f <- p2f + ggtitle("Number of Coupon Redemptions by the Age of Customers")
 p2f <- p2f + xlab("Age of Customers") + ylab("Number of Coupon Redemptions")
 p2f
+
+dev.copy(device = png, filename = 'Violin-CouponByAge.png', width = 800, height = 600) 
+dev.off()
