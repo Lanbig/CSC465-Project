@@ -1,6 +1,6 @@
 library(plyr)
-setwd("~/Dropbox/CSC465/dunnhumby_The-Complete-Journey/dunnhumby - The Complete Journey CSV")
-raw_transaction = read.table("transaction_data.csv", sep=",", header=T ,na.strings = " ")
+setwd("~/Dropbox/CSC465/CSC465-Project/")
+raw_transaction = read.table("./Dataset/transaction_data.csv", sep=",", header=T ,na.strings = " ")
 
 #remove NA
 raw_transaction_nNA <- raw_transaction[complete.cases(raw_transaction),]
@@ -9,7 +9,12 @@ raw_transaction_nNA <- raw_transaction[complete.cases(raw_transaction),]
 DateVol <- raw_transaction[,c("DAY","SALES_VALUE")]
 DateVol_agg <- ddply(DateVol,.(DAY),numcolwise(sum))
 DateVol_agg$Date <- as.Date(DateVol_agg$DAY -1, origin = "2010-03-24")
-calendarHeat(DateVol_agg$Date, DateVol_agg$SALES_VALUE, varname="Sales Value", color = 'r2b')
+
+p1 <- calendarHeat(DateVol_agg$Date, DateVol_agg$SALES_VALUE, varname="Sales Value", color = 'r2b')
+p1
+
+dev.copy(device = png, filename = 'Sales-calendarheat.png', width = 1024, height = 768) 
+dev.off()
 
 # Overall pattern 
 # Weekly pattern 
@@ -19,22 +24,18 @@ calendarHeat(DateVol_agg$Date, DateVol_agg$SALES_VALUE, varname="Sales Value", c
 #
 ###################################
 # the calendar heat for number of coupon_redempt thoughtout the years
-raw_coupon_redempt = read.table("coupon_redempt.csv", sep=",", header=T ,na.strings = " ")
+raw_coupon_redempt = read.table("./Dataset/coupon_redempt.csv", sep=",", header=T ,na.strings = " ")
 raw_coupon_redempt <- cbind(raw_coupon_redempt,1)
 colnames(raw_coupon_redempt)[5] <- "nCoupon"
 library(plyr)
 coupon_redempt_agg <- ddply(raw_coupon_redempt,.(DAY),numcolwise(sum))
 coupon_redempt_agg$Date <- as.Date(coupon_redempt_agg$DAY -1, origin = "2010-03-24")
 
-calendarHeat(coupon_redempt_agg$Date, coupon_redempt_agg$nCoupon, varname="Coupon_redempt thoughtout the years", color = 'w2g')
+p2 <- calendarHeat(coupon_redempt_agg$Date, coupon_redempt_agg$nCoupon, varname="Coupon_redempt thoughtout the years", color = 'w2g')
+p2
 
-
-####################################
-#max(transaction_data$DAY)
-#transaction_data$Date_Custom <- as.Date(transaction_data$DAY -1, origin = "2010-01-20")
-#transaction_data2 <- subset(transaction_data, transaction_data$Date_Custom >= as.Date("2011-11-01"))
-#write.csv(transaction_data2, file = "transaction_custom2.csv")
-
+dev.copy(device = png, filename = 'Coupon_redempt-calendarheat.png', width = 1024, height = 768) 
+dev.off()
 
 ##############################################################################
 #                        Calendar Heatmap                                    #
@@ -132,13 +133,13 @@ calendarHeat <- function(dates,
                                   labels = month.abb,
                                   alternating = c(1, rep(0, (nyr-1))),
                                   tck=0,
-                                  cex = 0.7),
+                                  cex = 0.9),
                                 y=list(
                                   at = c(0, 1, 2, 3, 4, 5, 6),
                                   labels = c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
                                              "Friday", "Saturday"),
                                   alternating = 1,
-                                  cex = 0.6,
+                                  cex = 0.9,
                                   tck=0)),
                               xlim =c(0.4, 54.6),
                               ylim=c(6.6,-0.6),

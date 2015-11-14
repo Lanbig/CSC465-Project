@@ -4,3 +4,5 @@
 Dataset/.RData
 
 Dataset/.Rhistory
+
+*.history
