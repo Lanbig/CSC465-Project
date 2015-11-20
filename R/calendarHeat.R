@@ -10,7 +10,7 @@ DateVol <- raw_transaction[,c("DAY","SALES_VALUE")]
 DateVol_agg <- ddply(DateVol,.(DAY),numcolwise(sum))
 DateVol_agg$Date <- as.Date(DateVol_agg$DAY -1, origin = "2010-03-24")
 
-p1 <- calendarHeat(DateVol_agg$Date, DateVol_agg$SALES_VALUE, varname="Sales Value", color = 'r2b')
+p1 <- calendarHeat(DateVol_agg$Date, DateVol_agg$SALES_VALUE, varname="Sales Value", color = 'b2r')
 p1
 
 dev.copy(device = png, filename = 'CalendarHeat-Sales.png', width = 1024, height = 768) 
@@ -104,6 +104,7 @@ calendarHeat <- function(dates,
   r2g <- c("#D61818", "#FFAE63", "#FFFFBD", "#B5E384")   #red to green
   w2b <- c("#045A8D", "#2B8CBE", "#74A9CF", "#BDC9E1", "#F1EEF6")   #white to blue
   w2g <- c("#FFF8C6", "#CCFB5D", "#52D017", "#347C17")   #white to green
+  b2r <- c("#CA0020", "#F4A582", "#F7F7F7", "#92C5DE", "#0571B0") #blue to red
   
   assign("col.sty", get(color))
   calendar.pal <- colorRampPalette((col.sty), space = "Lab")

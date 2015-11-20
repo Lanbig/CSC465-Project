@@ -13,7 +13,7 @@ head(raw_transaction)
 head(raw_product)
 
 
-raw_Day1 = raw_total_nNA[raw_total_nNA$DAY == 2, ]
+raw_Day1 = raw_total_nNA[raw_total_nNA$DAY == 400, ]
 raw_Day1
 
 edges = data.frame(p0=rep(0, 10000), p1=rep(0, 10000))
@@ -40,7 +40,17 @@ for (household in unique(raw_Day1$household_key))
     }
   }
 }
-edges = edges[1:nEdges, ]
+edges2 = edges[1:nEdges, ]
+
+edges2 <- cbind(edges2,1)
+colnames(edges2)[3] <- "num_edge"
+
+library(plyr)
+edges2_agg <- ddply(edges2,.(p0,p1),numcolwise(sum))
+
+edges2_agg <- edges2_agg[complete.cases(edges2_agg),]
+
+write.csv(edges2_agg, file="dep.csv")
 #####################
 
 g = graph.data.frame(edges, directed=F)
